@@ -1,0 +1,21 @@
+import tweepy                                                #basic importing of dependencies
+from textblob import TextBlob
+
+cons_key='muC2S2jyQCx6P5LYM73Tius5i'                                   #consumer encryption and decryption
+cons_secret='dbA03Dc6hDDCAETZzuwrXjIaQbmsBxUQfnPaAABr9xXfDflYG1'
+
+access_token='2523586407-aoyLWwQL1CaNOyRUFnGhtkzO284BoVsyB7Deqpn'      #to access the acc
+acess_token_secret='jTMZXxB04EOKRsWe4axnjmzVeN1NFZs9Xwv8gY3Rjff4T'
+
+auth = tweepy.OAuthHandler(cons_key,cons_secret)                                #function to authenticate the consumer
+auth.set_access_token(access_token,acess_token_secret)                        #get tob twitter and authenticate the access token
+
+
+api = tweepy.API(auth) #from tweepy the API method that takes a single authentication argument
+
+public_tweets = api.search('Trump') # gets/retrieve the tweets that contain the word trump and stores em here
+
+for tweets in public_tweets: #for loop to move through the n number of tweets!
+	print(tweets.text)  #this one prints out the tweets as part of string , with tht help of .text function
+	analysis = TextBlob(tweets.text)
+	print(analysis.sentiment)
